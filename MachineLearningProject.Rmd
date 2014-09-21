@@ -1,6 +1,42 @@
 Machine Learning Project
 ========================================================
 
+```{r}
+training<-read.csv("../Downloads/pml-training.csv")
+testing<-read.csv("../Downloads/pml-testing.csv")
+
+## reducing testing classes to be considered
+natest<-!is.na(testing[1,])
+bettertesting<-testing[,natest]
+training<-training[,natest]
+```
+
+
+```{r}
+library(plyr)
+## exactly according to the specification (Class A)
+ClassA<- training %>% filter(classe=="A") 
+## throwing the elbows to the front (Class B)
+ClassB<- training %>% filter(classe=="B") 
+## lifting the dumbbell only halfway (Class C)
+ClassC<- training %>% filter(classe=="C")
+## lowering the dumbbell only halfway (Class D)
+ClassD<- training %>% filter(classe=="D") 
+## throwing the hips to the front (Class E)
+ClassE<- training %>% filter(classe=="E") 
+```
+## get familiar with the classes
+
+```{r}
+tidy_data<-ClassA %>% group_by(user_name) %>% summarise(sum(magnet_forearm_z))
+        
+```
+        group_by(X) %>% summarise_each(funs(mean))
+
+
+
+
+
 
 Machine Learning Project
 ========================================================
@@ -19,4 +55,32 @@ CHANES
 
 ```{r}
 2+3
+```
+
+```{r}
+
+training<-read.csv("../Downloads/pml-training.csv")
+testing<-read.csv("../Downloads/pml-testing.csv")
+
+## reducing testing classes to be considered
+natest<-!is.na(testing[1,])
+bettertesting<-testing[,natest]
+training<-training[,natest]
+
+library(plyr)
+## exactly according to the specification (Class A)
+ClassA<- training %>% filter(classe=="A") 
+## throwing the elbows to the front (Class B)
+ClassB<- training %>% filter(classe=="B") 
+## lifting the dumbbell only halfway (Class C)
+ClassC<- training %>% filter(classe=="C")
+## lowering the dumbbell only halfway (Class D)
+ClassD<- training %>% filter(classe=="D") 
+## throwing the hips to the front (Class E)
+ClassE<- training %>% filter(classe=="E") 
+
+
+
+tidy_data<-training %>% filter(user_name=="adelmo")
+tidy_data<-tidy_data %>% summarise_each(funs(mean))
 ```
